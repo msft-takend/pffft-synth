@@ -1,18 +1,17 @@
-cmake_minimum_required(VERSION 3.10)
-project(pffft VERSION 0.1 LANGUAGES C CXX)
+# CMakeList.txt : Top-level CMake project file, do global configuration
+# and include sub-projects here.
+#
+cmake_minimum_required (VERSION 3.8)
 
-set(CMAKE_C_STANDARD 99)
-set(CMAKE_CXX_STANDARD 17)
 
-message(STATUS "Including local pffft")
-add_library(${PROJECT_NAME} pffft.c pffft.h pffft.hpp)
-add_library(surge::${PROJECT_NAME} ALIAS ${PROJECT_NAME})
-target_include_directories(${PROJECT_NAME} INTERFACE .)
-
-if (WIN32)
-    target_compile_definitions(${PROJECT_NAME} PUBLIC _USE_MATH_DEFINES)
+# Enable Hot Reload for MSVC compilers if supported.
+if (POLICY CMP0141)
+  cmake_policy(SET CMP0141 NEW)
+  set(CMAKE_MSVC_DEBUG_INFORMATION_FORMAT "$<IF:$<AND:$<C_COMPILER_ID:MSVC>,$<CXX_COMPILER_ID:MSVC>>,$<$<CONFIG:Debug,RelWithDebInfo>:EditAndContinue>,$<$<CONFIG:Debug,RelWithDebInfo>:ProgramDatabase>>")
 endif()
 
-if (${SURGE_PFFFT_BUILD_TESTS})
-    add_subdirectory(src-test)
-endif()
+project ("pffft-lib")
+
+# Include sub-projects.
+add_subdirectory ("src")
+
