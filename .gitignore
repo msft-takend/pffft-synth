@@ -105,3 +105,6 @@ libs/juce-*
 ignore/*
 __pycache__
 minst.sh
+
+**/bin
+**/vscode

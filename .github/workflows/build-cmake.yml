@@ -22,7 +22,7 @@ jobs:
 
       - name: Configure
         shell: bash
-        run: cmake -Bbuild -DCMAKE_BUILD_TYPE=Release -DSURGE_PFFFT_BUILD_TESTS=TRUE
+        run: cmake -B /bin -DCMAKE_BUILD_TYPE=Release /src
 
       - name: Build
         shell: bash
