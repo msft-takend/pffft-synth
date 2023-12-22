@@ -26,7 +26,7 @@ jobs:
 
       - name: Build
         shell: bash
-        run: cmake --build build --config Release --parallel 4 --target surge-pffft-tests
+        run: cmake --build ./src --config Release --parallel 4
 
       - name: Run Tests (win)
         shell: bash
